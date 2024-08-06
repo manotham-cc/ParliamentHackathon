@@ -1,25 +1,21 @@
-require('dotenv').config();
-const axios = require('axios');
-const FormData = require('form-data');
-const fs = require('fs');
-let data = new FormData();
-data.append('file', fs.createReadStream('./Test/30.mp4'));
+const speechToText = require('./speechToText');
+const summarizeText = require('./summarize');
+const summarize = require('./summarize');
 
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'https://api.iapp.co.th/asr/v3',
-  headers: { 
-    'apikey': process.env.ASR_API_KEY, 
-    ...data.getHeaders()
-  },
-  data : data
-};
+// Function to process audio, convert it to text, and summarize the text
+async function processAudio(filePath) {
+  try {
+    // Convert speech to text
+    const text = await speechToText(filePath);
+    console.log('Text:',text);
 
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
+    const summarize_text = await summarizeText(text);
+    console.log('Summarize:',summarize_text);
+  } catch (error) {
+    console.error('Error processing audio:', error);
+  }
+}
+
+// Example usage: process an audio file
+const audioFilePath = 'Test/30.mp4'; // Update with your audio file path
+processAudio(audioFilePath);
