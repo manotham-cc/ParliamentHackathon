@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Processor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload and Process MP4 File</h1>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" accept=".mp4" required />
+            <button type="submit">Upload</button>
+        </form>
+        <p id="error" class="error"></p>
+        <div id="results">
+            <h2>Extracted Text</h2>
+            <p id="text"></p>
+            <h2>Summary</h2>
+            <p id="summary"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
